@@ -6,56 +6,56 @@ from Script import script  # Custom script file with caption & other settings
 # 🚀 Bot Session and Token Information
 SESSION = environ.get('SESSION', 'Webavbot')  # Pyrogram client session name
 
-API_ID = int(environ.get('API_ID', '12300656'))  # Telegram API ID
-API_HASH = environ.get('API_HASH', 'd927c13beaaf5110f5b7c071273')  # Telegram API Hash
+API_ID = int(environ.get('API_ID', '16013849'))  # Telegram API ID
+API_HASH = environ.get('API_HASH', 'c8686adc1a0c7cd17f2201c40123ce91')  # Telegram API Hash
 BOT_TOKEN = environ.get('BOT_TOKEN', '672782:AAE3VrD2SewKmu6ytwU4H1vRtfc')  # Telegram Bot Token
 
 # 👑, Channels & Logs
-BIN_CHANNEL = int(environ.get("BIN_CHANNEL", '-1001973960964'))  # File storage channel
-LOG_CHANNEL = int(environ.get("LOG_CHANNEL", '-1002110971750'))  # General log channel
-PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", '-1002227216574'))  # Premium user actions log
-VERIFIED_LOG = int(environ.get('VERIFIED_LOG', '-1002227216574'))  # Verified user actions log
+BIN_CHANNEL = int(environ.get("BIN_CHANNEL", '-1003062906567'))  # File storage channel
+LOG_CHANNEL = int(environ.get("LOG_CHANNEL", '-1003062906567'))  # General log channel
+PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", '-1003062906567'))  # Premium user actions log
+VERIFIED_LOG = int(environ.get('VERIFIED_LOG', '-1003062906567'))  # Verified user actions log
 SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1002028053413"))
 
 # add admin IDs 11111 2222 3333 and add auth channel IDs -100XXX -100XXX -100XXX
-ADMINS = list(map(int, environ.get('ADMINS', '5977931010').split()))  # List of admin user IDs
-AUTH_CHANNEL = list(map(int, environ.get("AUTH_CHANNEL", "-1002102037760 -1002012150170").split()))  # Allowed channels for authorization
+ADMINS = list(map(int, environ.get('ADMINS', '949657126').split()))  # List of admin user IDs
+AUTH_CHANNEL = list(map(int, environ.get("AUTH_CHANNEL", "-1001547011153").split()))  # Allowed channels for authorization
 
 # username add without @
-OWNER_USERNAME = environ.get("OWNER_USERNAME", 'BOT_OWNER26')  # Owner's username
-BOT_USERNAME = environ.get("BOT_USERNAME", 'AV_F2L_BOT')  # Bot's username
+OWNER_USERNAME = environ.get("OWNER_USERNAME", 'MLADMINBOT')  # Owner's username
+BOT_USERNAME = environ.get("BOT_USERNAME", 'MLFILETOLINKBOT')  # Bot's username
 
 # 🔗 Channel & Support Links
-CHANNEL = environ.get('CHANNEL', 'https://t.me/AV_BOTz_UPDATE')  # Updates channel
-SUPPORT = environ.get('SUPPORT', 'https://t.me/AV_SUPPORT_GROUP')  # Support group
-HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/')  # Verification guide link
-HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/')  # File access guide link
+CHANNEL = environ.get('CHANNEL', 'https://t.me/MOVIE_LOVERZZ')  # Updates channel
+SUPPORT = environ.get('SUPPORT', 'https://t.me/AV_SUPRT_GROUP')  # Support group
+HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/ML_FILES/19')  # Verification guide link
+HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/ML_FILES/19')  # File access guide link
 
 # ✅ Feature Toggles (True/False)
-VERIFY = environ.get("VERIFY", False)  # Enable user verification
+VERIFY = environ.get("VERIFY", True)  # Enable user verification
 FSUB = environ.get("FSUB", True)  # Force Subscribe feature
 ENABLE_LIMIT = environ.get("ENABLE_LIMIT", True)  # Enable file limits
 BATCH_VERIFY = environ.get("BATCH_VERIFY", False)  # Verify files in batch
-IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))  # Enable channel shortlink creation
+IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', True))  # Enable channel shortlink creation
 MAINTENANCE_MODE = environ.get("MAINTENANCE_MODE", False)  # Put bot in maintenance
 PROTECT_CONTENT = environ.get('PROTECT_CONTENT', False)  # Enable content protection
-PUBLIC_FILE_STORE = environ.get('PUBLIC_FILE_STORE', True)  # Public or private file visibility
+PUBLIC_FILE_STORE = environ.get('PUBLIC_FILE_STORE', False)  # Public or private file visibility
 BATCH_PROTECT_CONTENT = environ.get('BATCH_PROTECT_CONTENT', False)  # Batch file protection
 
 # 🔗 Shortlink Configuration
-SHORTLINK_URL = environ.get('SHORTLINK_URL', 'techvjlink.site')  # Shortener site
-SHORTLINK_API = environ.get('SHORTLINK_API', 'd73e70a35dc3877fa14afbf51fa8ec312c94780c')  # API key for shortlink
+SHORTLINK_URL = environ.get('SHORTLINK_URL', 'linkshortify.com')  # Shortener site
+SHORTLINK_API = environ.get('SHORTLINK_API', 'a27e6b177c47ce6a7b22bcbce2235ce66d893ac8')  # API key for shortlink
 
 # 💾 MongoDB Connection Information
-DB_URL = environ.get('DATABASE_URI', "mongodb+srv://aman:aman@cluster0p1.mongodb.net/?rites=truity&appName=Cluster0")  # MongoDB connection URI
-DB_NAME = environ.get('DATABASE_NAME', "cluster0")  # MongoDB database name
+DB_URL = environ.get('DATABASE_URI', "mongodb+srv://primebaby11220:TuGa0I5ZsiC8mp5A@cluster0.df4rivj.mongodb.net/?retryWrites=true&w=majority")  # MongoDB connection URI
+DB_NAME = environ.get('DATABASE_NAME', "primebaby11220")  # MongoDB database name
 
 # 📸 all Media (Images)
-QR_CODE = environ.get('QR_CODE', 'https://graph.org/file/6afb4093d5ec5c4176979.jpg')  # QR Code image
+QR_CODE = environ.get('QR_CODE', 'https://graph.org/file/a319f6b9ce3b993c6e22f.jpg')  # QR Code image
 VERIFY_IMG = environ.get("VERIFY_IMG", "https://graph.org/file/1669ab9af68eaa62c3ca4.jpg")  # Verify success image
 AUTH_PICS = environ.get('AUTH_PICS', 'https://envs.sh/AwV.jpg')  # Auth step image
-PICS = environ.get('PICS', 'https://envs.sh/_pM.jpg')  # Default info image
-FILE_PIC = environ.get('FILE_PIC', 'https://i.ibb.co/bj4My0bW/photo-2025-07-21-02-15-21-7529360175656861700.jpg') # file image 
+PICS = environ.get('PICS', 'https://graph.org/file/a319f6b9ce3b993c6e22f.jpg')  # Default info image
+FILE_PIC = environ.get('FILE_PIC', 'https://graph.org/file/a319f6b9ce3b993c6e22f.jpg') # file image 
 
 # 📝 File Captions
 FILE_CAPTION = environ.get('FILE_CAPTION', f"{script.CAPTION}")  # Caption for single file
@@ -67,11 +67,11 @@ PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # Ping interval in se
 SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '60'))  # Threshold for sleep delay
 RATE_LIMIT_TIMEOUT = int(environ.get("RATE_LIMIT_TIMEOUT", "600"))  # Rate limit time (10 mins)
 MAX_FILES = int(environ.get("MAX_FILES", "5"))  # Max files allowed per user
-VERIFY_EXPIRE = int(environ.get('VERIFY_EXPIRE', 60))  # Time (in hours) after which verification expires
+VERIFY_EXPIRE = int(environ.get('VERIFY_EXPIRE', 12))  # Time (in hours) after which verification expires
 
 # ⚙️ Worker Configuration
-WORKERS = int(getenv('WORKERS', '4'))  # Number of async workers
-MULTI_CLIENT = False  # Enable multi-client handling (if needed)
+WORKERS = int(getenv('WORKERS', '20'))  # Number of async workers
+MULTI_CLIENT = True  # Enable multi-client handling (if needed)
 
 # 🔧 App/Heroku Configuration
 name = str(environ.get('name', 'avbotz'))  # Project name
@@ -83,11 +83,11 @@ else:
     ON_HEROKU = False
 
 # 🌐 Server Settings
-PORT = int(getenv('PORT', '2626'))  # Port for web server
+PORT = int(getenv('PORT', '8087'))  # Port for web server
 NO_PORT = str(getenv("NO_PORT", False)).lower() in ("true", "1", "yes")  # Disable port in URL
-HAS_SSL = str(getenv("HAS_SSL", False)).lower() in ("true", "1", "yes")  # Use HTTPS if True
+HAS_SSL = str(getenv("HAS_SSL", True)).lower() in ("true", "1", "yes")  # Use HTTPS if True
 BIND_ADDRESS = getenv("WEB_SERVER_BIND_ADDRESS", "127.0.0.1")  # Server bind address
-FQDN = getenv("FQDN", "") or BIND_ADDRESS  # Full domain name or fallback to bind address
+FQDN = getenv("FQDN", "https://movie-loverzz-bot2-f457cc86a417.herokuapp.com/") or BIND_ADDRESS  # Full domain name or fallback to bind address
 PORT_SEGMENT = "" if NO_PORT else f":{PORT}/"  # Port in URL if not disabled
 PROTOCOL = "https" if HAS_SSL else "http"  # Protocol for URL
 URL = f"{PROTOCOL}://{FQDN}{PORT_SEGMENT}"  # Final generated base URL
