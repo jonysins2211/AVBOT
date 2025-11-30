@@ -1,0 +1,213 @@
+{
+  "name": "av_botz_update",
+  "description": "A Pyrogram Telegram bot to stream Telegram files to web. @bot_owner26",
+  "keywords": [
+    "telegram",
+    "stream",
+    "web",
+    "pyrogram",
+    "aiohttp",
+    "python",
+    "plugin",
+    "modular",
+    "media",
+    "bot"
+  ],
+  "repository": "https://github.com/Botsthe/AV-FILE-TO-LINK-PRO.git",
+  "success_url": "/",
+  "logo": "https://i.ibb.co/v1YTMm3/icon.png",
+  "env": {
+    "ENV": {
+      "description": "Set this to True if you don't want the bot to crash",
+      "value": "True"
+    },
+    "APP_NAME": {
+      "description": "Heroku app name (optional)"
+    },
+    "API_ID": {
+      "description": "Get this value from https://my.telegram.org"
+    },
+    "API_HASH": {
+      "description": "Get this value from https://my.telegram.org"
+    },
+    "BOT_TOKEN": {
+      "description": "Get this from @BotFather"
+    },
+    "SESSION": {
+      "description": "Pyrogram session string or name",
+      "value": "Webavbot"
+    },
+    "BIN_CHANNEL": {
+      "description": "File store channel ID"
+    },
+    "LOG_CHANNEL": {
+      "description": "Log channel ID"
+    },
+    "PREMIUM_LOGS": {
+      "description": "Channel ID for premium logs"
+    },
+    "VERIFIED_LOG": {
+      "description": "Channel ID for verified logs"
+    },
+    "ADMINS": {
+      "description": "List of admin Telegram user IDs, space separated"
+    },
+    "AUTH_CHANNEL": {
+      "description": "List of allowed channel IDs (start with -100), space separated"
+    },
+    "OWNER_USERNAME": {
+      "description": "Bot owner's Telegram username"
+    },
+    "BOT_USERNAME": {
+      "description": "Bot username without @"
+    },
+    "CHANNEL": {
+      "description": "Public updates channel URL",
+      "value": "https://t.me/AV_BOTz_UPDATE"
+    },
+    "SUPPORT": {
+      "description": "Support group URL",
+      "value": "https://t.me/AV_SUPPORT_GROUP"
+    },
+    "HOW_TO_VERIFY": {
+      "description": "Link to verification guide"
+    },
+    "HOW_TO_OPEN": {
+      "description": "Link to file opening guide"
+    },
+    "VERIFY": {
+      "description": "Enable user verification (True/False)",
+      "value": "False"
+    },
+    "FSUB": {
+      "description": "Enable Force Subscribe (True/False)",
+      "value": "False"
+    },
+    "ENABLE_LIMIT": {
+      "description": "Enable file upload limits (True/False)",
+      "value": "False"
+    },
+    "BATCH_VERIFY": {
+      "description": "Enable batch file verification (True/False)",
+      "value": "False"
+    },
+    "IS_SHORTLINK": {
+      "description": "Enable shortlink creation (True/False)",
+      "value": "False"
+    },
+    "MAINTENANCE_MODE": {
+      "description": "Enable maintenance mode (True/False)",
+      "value": "False"
+    },
+    "PROTECT_CONTENT": {
+      "description": "Enable file content protection (True/False)",
+      "value": "False"
+    },
+    "PUBLIC_FILE_STORE": {
+      "description": "Make files public (True/False)",
+      "value": "True"
+    },
+    "BATCH_PROTECT_CONTENT": {
+      "description": "Enable protection for batch files (True/False)",
+      "value": "False"
+    },
+    "SHORTLINK_URL": {
+      "description": "Shortener domain (e.g. techvjlink.site)"
+    },
+    "SHORTLINK_API": {
+      "description": "API key for shortlink generator"
+    },
+    "DATABASE_URI": {
+      "description": "MongoDB URI",
+      "required": true
+    },
+    "DATABASE_NAME": {
+      "description": "MongoDB database name",
+      "value": "Cluster0"
+    },
+    "QR_CODE": {
+      "description": "QR code image URL"
+    },
+    "VERIFY_IMG": {
+      "description": "Verification success image URL"
+    },
+    "AUTH_PICS": {
+      "description": "Authentication instruction image",
+      "value": "https://envs.sh/AwV.jpg"
+    },
+    "PICS": {
+      "description": "Default bot image",
+      "value": "https://envs.sh/b6H.jpg"
+    },
+    "FILE_CAPTION": {
+      "description": "Caption template for single file"
+    },
+    "BATCH_FILE_CAPTION": {
+      "description": "Caption template for batch file"
+    },
+    "CHANNEL_FILE_CAPTION": {
+      "description": "Caption template for channel posts"
+    },
+    "PING_INTERVAL": {
+      "description": "Ping interval (seconds)",
+      "value": "1200"
+    },
+    "SLEEP_THRESHOLD": {
+      "description": "Floodwait sleep delay (seconds)",
+      "value": "60"
+    },
+    "RATE_LIMIT_TIMEOUT": {
+      "description": "User rate limit timeout (seconds)",
+      "value": "600"
+    },
+    "MAX_FILES": {
+      "description": "Max files allowed per user",
+      "value": "10"
+    },
+    "VERIFY_EXPIRE": {
+      "description": "Hours after which verification expires",
+      "value": "60"
+    },
+    "WORKERS": {
+      "description": "Number of async workers",
+      "value": "4"
+    },
+    "name": {
+      "description": "Bot session name",
+      "value": "File-To-Link"
+    },
+    "PORT": {
+      "description": "Port number for web server",
+      "value": "2626"
+    },
+    "NO_PORT": {
+      "description": "Hide port in URL (True/False)",
+      "value": "False"
+    },
+    "HAS_SSL": {
+      "description": "Enable HTTPS (True/False)",
+      "value": "True"
+    },
+    "WEB_SERVER_BIND_ADDRESS": {
+      "description": "Server bind address (Heroku = leave empty)"
+    },
+    "FQDN": {
+      "description": "Full domain name (Heroku = leave empty)"
+    },
+    "BAN_ALERT": {
+      "description": "Text shown to banned users"
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  }
+  }
