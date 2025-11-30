@@ -15,7 +15,7 @@ BIN_CHANNEL = int(environ.get("BIN_CHANNEL", '-1003062906567'))  # File storage 
 LOG_CHANNEL = int(environ.get("LOG_CHANNEL", '-1003062906567'))  # General log channel
 PREMIUM_LOGS = int(environ.get("PREMIUM_LOGS", '-1003062906567'))  # Premium user actions log
 VERIFIED_LOG = int(environ.get('VERIFIED_LOG', '-1003062906567'))  # Verified user actions log
-SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1002028053413"))
+SUPPORT_GROUP = int(environ.get("SUPPORT_GROUP", "-1003062906567"))
 
 # add admin IDs 11111 2222 3333 and add auth channel IDs -100XXX -100XXX -100XXX
 ADMINS = list(map(int, environ.get('ADMINS', '949657126').split()))  # List of admin user IDs
@@ -66,8 +66,8 @@ CHANNEL_FILE_CAPTION = environ.get('CHANNEL_FILE_CAPTION', f"{script.CAPTION}") 
 PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # Ping interval in seconds (20 minutes)
 SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '60'))  # Threshold for sleep delay
 RATE_LIMIT_TIMEOUT = int(environ.get("RATE_LIMIT_TIMEOUT", "600"))  # Rate limit time (10 mins)
-MAX_FILES = int(environ.get("MAX_FILES", "5"))  # Max files allowed per user
-VERIFY_EXPIRE = int(environ.get('VERIFY_EXPIRE', 12))  # Time (in hours) after which verification expires
+MAX_FILES = int(environ.get("MAX_FILES", "4"))  # Max files allowed per user
+VERIFY_EXPIRE = int(environ.get('VERIFY_EXPIRE', 24))  # Time (in hours) after which verification expires
 
 # ⚙️ Worker Configuration
 WORKERS = int(getenv('WORKERS', '20'))  # Number of async workers
