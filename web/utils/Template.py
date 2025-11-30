@@ -1,5 +1,5 @@
 class avbotz_template(object):
-    NAME = "AV BOTz "
+    NAME = "MOVIE LOVERZ"
 
     DISCLAIMER = (
         "This website only provides a service to help you play your video online without downloading. "
