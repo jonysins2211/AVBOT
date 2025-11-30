@@ -90,4 +90,4 @@ BIND_ADDRESS = getenv("WEB_SERVER_BIND_ADDRESS", "127.0.0.1")  # Server bind add
 FQDN = getenv("FQDN", "https://movie-loverzz-bot2-f457cc86a417.herokuapp.com/") or BIND_ADDRESS  # Full domain name or fallback to bind address
 PORT_SEGMENT = "" if NO_PORT else f":{PORT}/"  # Port in URL if not disabled
 PROTOCOL = "https" if HAS_SSL else "http"  # Protocol for URL
-URL = f"{PROTOCOL}://{FQDN}{PORT_SEGMENT}"  # Final generated base URL
+URL = f"https://movie-loverzz-bot2-f457cc86a417.herokuapp.com/"  # Final generated base URL
