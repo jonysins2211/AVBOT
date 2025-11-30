@@ -6,7 +6,7 @@ class avbotz_template(object):
         "You can report files or videos that contain issues like copyright infringement, +18 content, violence, etc."
     )
 
-    REPORT_LINK = "https://t.me/AV_SUPPORT_GROUP"
+    REPORT_LINK = "https://t.me/MLADMINBOT"
 
     COLOURS = {
         "header": {"background": "#48cffe", "color": "#ffffff"},
