@@ -245,7 +245,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         buttons = [
             [
                 InlineKeyboardButton(
-                    "☆📸 ꜱᴇɴᴅ ꜱᴄʀᴇᴇɴꜱʜᴏᴛ 📸☆",
+                    "☆📸 𝐂𝐨𝐧𝐭𝐚𝐜𝐭 𝐀𝐝𝐦𝐢𝐧 𝐅𝐨𝐫 𝐏𝐫𝐞𝐦𝐢𝐮𝐦 📸☆",
                     url=f"https://t.me/{OWNER_USERNAME}"),
             ],[
                 InlineKeyboardButton("• ʙᴀᴄᴋ •", callback_data='premium_info'),
