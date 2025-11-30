@@ -67,7 +67,7 @@ PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # Ping interval in se
 SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '60'))  # Threshold for sleep delay
 RATE_LIMIT_TIMEOUT = int(environ.get("RATE_LIMIT_TIMEOUT", "600"))  # Rate limit time (10 mins)
 MAX_FILES = int(environ.get("MAX_FILES", "4"))  # Max files allowed per user
-VERIFY_EXPIRE = int(environ.get('VERIFY_EXPIRE', 24))  # Time (in hours) after which verification expires
+VERIFY_EXPIRE = int(environ.get('VERIFY_EXPIRE', 28800))  # Time (in hours) after which verification expires
 
 # ⚙️ Worker Configuration
 WORKERS = int(getenv('WORKERS', '20'))  # Number of async workers
