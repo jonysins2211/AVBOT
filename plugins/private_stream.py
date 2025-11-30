@@ -74,10 +74,10 @@ async def private_receive_handler(c: Client, m: Message):
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("• ꜱᴛʀᴇᴀᴍ •", url=stream),
                  InlineKeyboardButton("• ᴅᴏᴡɴʟᴏᴀᴅ •", url=download)],
-                [InlineKeyboardButton("• ɢᴇᴛ ғɪʟᴇ •", url=file_link),
-                 InlineKeyboardButton("• ꜱʜᴀʀᴇ•", url=share_link)],
-                [InlineKeyboardButton("• ᴅᴇʟᴇᴛᴇ ғɪʟᴇ •", callback_data=f"deletefile_{forwarded.id}"),
-                 InlineKeyboardButton("• ᴄʟᴏꜱᴇ •", callback_data="close_data")]
+                #[InlineKeyboardButton("• ɢᴇᴛ ғɪʟᴇ •", url=file_link),
+                 #InlineKeyboardButton("• ꜱʜᴀʀᴇ•", url=share_link)],
+                #[InlineKeyboardButton("• ᴅᴇʟᴇᴛᴇ ғɪʟᴇ •", callback_data=f"deletefile_{forwarded.id}"),
+                # InlineKeyboardButton("• ᴄʟᴏꜱᴇ •", callback_data="close_data")]
             ])
         )
 
