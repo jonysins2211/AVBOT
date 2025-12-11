@@ -28,8 +28,8 @@ BOT_USERNAME = environ.get("BOT_USERNAME", 'MLFILETOLINKBOT')  # Bot's username
 # 🔗 Channel & Support Links
 CHANNEL = environ.get('CHANNEL', 'https://t.me/MOVIE_LOVERZZ')  # Updates channel
 SUPPORT = environ.get('SUPPORT', 'https://t.me/AV_SUPRT_GROUP')  # Support group
-HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/ML_FILES/19')  # Verification guide link
-HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/ML_FILES/19')  # File access guide link
+HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/ML_FILES/17')  # Verification guide link
+HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/ML_FILES/17')  # File access guide link
 
 # ✅ Feature Toggles (True/False)
 VERIFY = environ.get("VERIFY", True)  # Enable user verification
