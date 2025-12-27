@@ -35,16 +35,16 @@ HOW_TO_OPEN = environ.get('HOW_TO_OPEN', 'https://t.me/ML_FILES/17')  # File acc
 VERIFY = environ.get("VERIFY", True)  # Enable user verification
 FSUB = environ.get("FSUB", True)  # Force Subscribe feature
 ENABLE_LIMIT = environ.get("ENABLE_LIMIT", True)  # Enable file limits
-BATCH_VERIFY = environ.get("BATCH_VERIFY", False)  # Verify files in batch
-IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', True))  # Enable channel shortlink creation
+BATCH_VERIFY = environ.get("BATCH_VERIFY", True)  # Verify files in batch
+IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))  # Enable channel shortlink creation
 MAINTENANCE_MODE = environ.get("MAINTENANCE_MODE", False)  # Put bot in maintenance
 PROTECT_CONTENT = environ.get('PROTECT_CONTENT', False)  # Enable content protection
 PUBLIC_FILE_STORE = environ.get('PUBLIC_FILE_STORE', False)  # Public or private file visibility
 BATCH_PROTECT_CONTENT = environ.get('BATCH_PROTECT_CONTENT', False)  # Batch file protection
 
 # 🔗 Shortlink Configuration
-SHORTLINK_URL = environ.get('SHORTLINK_URL', 'linkshortify.com')  # Shortener site
-SHORTLINK_API = environ.get('SHORTLINK_API', 'a27e6b177c47ce6a7b22bcbce2235ce66d893ac8')  # API key for shortlink
+SHORTLINK_URL = environ.get('SHORTLINK_URL', 'arolinks.com')  # Shortener site
+SHORTLINK_API = environ.get('SHORTLINK_API', 'b45f8f81a9b97173588484df25715cb97b4d3fb1')  # API key for shortlink
 
 # 💾 MongoDB Connection Information
 DB_URL = environ.get('DATABASE_URI', "mongodb+srv://primebaby11220:TuGa0I5ZsiC8mp5A@cluster0.df4rivj.mongodb.net/?retryWrites=true&w=majority")  # MongoDB connection URI
