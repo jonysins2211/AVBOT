@@ -51,7 +51,7 @@ DB_URL = environ.get('DATABASE_URI', "mongodb+srv://primebaby11220:TuGa0I5ZsiC8m
 DB_NAME = environ.get('DATABASE_NAME', "primebaby11220")  # MongoDB database name
 
 # 📸 all Media (Images)
-QR_CODE = environ.get('QR_CODE', 'https://graph.org/file/a319f6b9ce3b993c6e22f.jpg')  # QR Code image
+QR_CODE = environ.get('QR_CODE', 'https://i.ibb.co/Vcktd8h4/photo-2026-01-06-15-59-03-7592278796548440092.jpg')  # QR Code image
 VERIFY_IMG = environ.get("VERIFY_IMG", "https://graph.org/file/1669ab9af68eaa62c3ca4.jpg")  # Verify success image
 AUTH_PICS = environ.get('AUTH_PICS', 'https://envs.sh/AwV.jpg')  # Auth step image
 PICS = environ.get('PICS', 'https://graph.org/file/a319f6b9ce3b993c6e22f.jpg')  # Default info image
