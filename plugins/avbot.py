@@ -2,7 +2,7 @@ from pyrogram.errors import UserNotParticipant, ChatAdminRequired
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from pyrogram.enums import ParseMode
 from Script import script
-from utils import check_verification
+from utils import check_verification, get_shortlink
 from info import (
     AUTH_PICS, BATCH_VERIFY, VERIFY, HOW_TO_VERIFY,
     AUTH_CHANNEL, ENABLE_LIMIT, RATE_LIMIT_TIMEOUT,
@@ -10,12 +10,6 @@ from info import (
 )
 import asyncio, time
 import hmac, hashlib, base64, json
-
-# =======================
-# 🔐 SECURE CONFIG
-# =======================
-#SECRET_KEY = b"sM3WQvFq9e1D8A7NnH8JcP2X6KkYB9RZsU5V4x"
-#VERCEL_VERIFY_URL = "https://movie-loverzz-bots.vercel.app/"
 
 rate_limit = {}
 
@@ -27,9 +21,10 @@ def generate_secure_token(user_id, expire=600):
         "u": user_id,
         "e": int(time.time()) + expire
     }
+
     data = json.dumps(payload)
     sig = hmac.new(
-        SECRET_KEY,
+        SECRET_KEY,          # MUST be bytes
         data.encode(),
         hashlib.sha256
     ).hexdigest()
@@ -98,16 +93,22 @@ async def av_verification(client, message):
     user_id = message.from_user.id
 
     if VERIFY and not await check_verification(client, user_id):
+
         token = generate_secure_token(user_id)
-        verify_url = f"{VERCEL_VERIFY_URL}/{token}"
+
+        # 🔐 Vercel secure redirect URL (NO trailing slash in config)
+        redirect_url = f"{VERCEL_VERIFY_URL}/{token}"
+
+        # 🔗 Wrap redirect URL with shortener
+        short_url = await get_shortlink(redirect_url)
 
         btn = [[
-            InlineKeyboardButton("✅️ ᴠᴇʀɪғʏ ✅️", url=verify_url),
+            InlineKeyboardButton("✅️ ᴠᴇʀɪғʏ ✅️", url=short_url),
             InlineKeyboardButton("⁉️ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪғʏ ⁉️", url=HOW_TO_VERIFY)
-        ], [
+        ],[
             InlineKeyboardButton(
                 "😁 ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ - ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴠᴇʀɪғʏ 😁",
-                callback_data='seeplans'
+                callback_data="seeplans"
             )
         ]]
 
@@ -133,16 +134,18 @@ async def av_x_verification(client, message):
     user_id = message.from_user.id
 
     if BATCH_VERIFY and not await check_verification(client, user_id):
+
         token = generate_secure_token(user_id)
-        verify_url = f"{VERCEL_VERIFY_URL}/{token}"
+        redirect_url = f"{VERCEL_VERIFY_URL}/{token}"
+        short_url = await get_shortlink(redirect_url)
 
         btn = [[
-            InlineKeyboardButton("✅️ ᴠᴇʀɪғʏ ✅️", url=verify_url),
+            InlineKeyboardButton("✅️ ᴠᴇʀɪғʏ ✅️", url=short_url),
             InlineKeyboardButton("⁉️ ʜᴏᴡ ᴛᴏ ᴠᴇʀɪғʏ ⁉️", url=HOW_TO_VERIFY)
-        ], [
+        ],[
             InlineKeyboardButton(
                 "😁 ʙᴜʏ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ - ɴᴏ ɴᴇᴇᴅ ᴛᴏ ᴠᴇʀɪғʏ 😁",
-                callback_data='seeplans'
+                callback_data="seeplans"
             )
         ]]
 
