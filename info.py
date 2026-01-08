@@ -10,6 +10,18 @@ API_ID = int(environ.get('API_ID', '16013849'))  # Telegram API ID
 API_HASH = environ.get('API_HASH', 'c8686adc1a0c7cd17f2201c40123ce91')  # Telegram API Hash
 BOT_TOKEN = environ.get('BOT_TOKEN', '672782:AAE3VrD2SewKmu6ytwU4H1vRtfc')  # Telegram Bot Token
 
+# ===============================
+# 🔐 SECURE VERIFICATION SETTINGS
+# ===============================
+
+# MUST be same as Vercel SECRET_KEY
+SECRET_KEY = b"sM3WQvFq9e1D8A7NnH8JcP2X6KkYB9RZsU5V4x"
+
+# Your deployed Vercel redirect URL (NO trailing slash)
+VERCEL_VERIFY_URL = "https://movie-loverzz-bots.vercel.app/"
+
+
+
 # 👑, Channels & Logs
 BIN_CHANNEL = int(environ.get("BIN_CHANNEL", '-1003062906567'))  # File storage channel
 LOG_CHANNEL = int(environ.get("LOG_CHANNEL", '-1003062906567'))  # General log channel
