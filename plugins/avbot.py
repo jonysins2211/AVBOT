@@ -14,8 +14,8 @@ import hmac, hashlib, base64, json
 # =======================
 # 🔐 SECURE CONFIG
 # =======================
-SECRET_KEY = b"CHANGE_THIS_TO_SAME_AS_VERCEL"
-VERCEL_VERIFY_URL = "https://your-vercel-app.vercel.app/verify"
+SECRET_KEY = b"sM3WQvFq9e1D8A7NnH8JcP2X6KkYB9RZsU5V4x"
+VERCEL_VERIFY_URL = "https://movie-loverzz-bots.vercel.app/"
 
 rate_limit = {}
 
