@@ -6,7 +6,7 @@ from utils import check_verification
 from info import (
     AUTH_PICS, BATCH_VERIFY, VERIFY, HOW_TO_VERIFY,
     AUTH_CHANNEL, ENABLE_LIMIT, RATE_LIMIT_TIMEOUT,
-    MAX_FILES, BOT_USERNAME
+    MAX_FILES, BOT_USERNAME, SECRET_KEY, VERCEL_VERIFY_URL
 )
 import asyncio, time
 import hmac, hashlib, base64, json
@@ -14,8 +14,8 @@ import hmac, hashlib, base64, json
 # =======================
 # 🔐 SECURE CONFIG
 # =======================
-SECRET_KEY = b"sM3WQvFq9e1D8A7NnH8JcP2X6KkYB9RZsU5V4x"
-VERCEL_VERIFY_URL = "https://movie-loverzz-bots.vercel.app/"
+#SECRET_KEY = b"sM3WQvFq9e1D8A7NnH8JcP2X6KkYB9RZsU5V4x"
+#VERCEL_VERIFY_URL = "https://movie-loverzz-bots.vercel.app/"
 
 rate_limit = {}
 
