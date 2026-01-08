@@ -97,24 +97,24 @@ async def check_token(bot, userid, token):
     return tokens.get(token) is False
 
 # -------------------------- TOKEN GENERATOR (UPDATED) -------------------------- #
-async def get_token(bot, userid, link):
-    """
-    Generates:
-    https://vercel.app/v?d=ENCRYPTED_DATA
-    """
+async def get_token(bot, userid, link=None):
     user = await bot.get_users(userid)
 
+    # Generate token
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
     temp.TOKENS[user.id] = {token: False}
 
-    full_verify_link = f"{link}verify-{user.id}-{token}"
+    # 🔥 FINAL BOT VERIFY LINK (AFTER SHORTENER)
+    bot_verify_link = f"https://t.me/{BOT_USERNAME}?start=verify-{user.id}-{token}"
 
+    # Encrypt BOT link (NOT shortener, NOT direct)
     encrypted = encrypt_verify_link(
-        full_verify_link,
+        bot_verify_link,
         user.id,
         expiry=VERIFY_EXPIRE
     )
 
+    # Vercel will open → shortener → bot
     return f"{VERCEL_VERIFY_URL}?d={encrypted}"
 
 # -------------------------- GET VERIFY STATUS -------------------------- #
