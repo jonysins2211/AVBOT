@@ -4,106 +4,65 @@ import aiohttp
 import traceback
 import random
 import string
+import base64
+import time as t
 from datetime import datetime, timedelta, date, time
 import pytz
+
 from database.users_db import db
 from Script import script
 from info import *
-from shortzy import Shortzy
 
-# -------------------------- LOGGER INITIALIZATION -------------------------- #
-# Logger को initialize किया गया ताकि errors और info logs को track किया जा सके
+# -------------------------- LOGGER -------------------------- #
 logger = logging.getLogger(__name__)
 
-# -------------------------- TEMPORARY DATA STORAGE -------------------------- #
-# यह क्लास बोट के रनटाइम में temporary इन-मैमोरी storage के रूप में काम करती है
+# -------------------------- TEMP STORAGE -------------------------- #
 class temp:
     ME = None
     BOT = None
     U_NAME = None
     B_NAME = None
-    TOKENS = {}      # User tokens temporarily store करने के लिए
-    VERIFIED = {}    # Verified users की जानकारी cache करने के लिए
+    TOKENS = {}
+    VERIFIED = {}
 
 # -------------------------- PING SERVER -------------------------- #
-# Server को नियमित समय पर ping करता है ताकि वह active बना रहे
 async def ping_server():
     while True:
-        await asyncio.sleep(PING_INTERVAL)  # हर interval पर रन होगा
+        await asyncio.sleep(PING_INTERVAL)
         try:
-            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=10)) as session:
+            async with aiohttp.ClientSession(
+                timeout=aiohttp.ClientTimeout(total=10)
+            ) as session:
                 async with session.get(URL) as resp:
-                    logging.info(f"✅ Pinged server: {resp.status}")
-        except asyncio.TimeoutError:
-            logger.warning("⚠️ Timeout: Could not ping server!")
+                    logger.info(f"✅ Pinged server: {resp.status}")
         except Exception as e:
-            logger.error(f"❌ Exception while pinging server: {e}")
+            logger.error(f"❌ Ping error: {e}")
             traceback.print_exc()
 
-# -------------------------- FILE SIZE CONVERTER -------------------------- #
-# Bytes में दिए गए साइज़ को human-readable format में convert करता है
+# -------------------------- FILE SIZE -------------------------- #
 def get_size(size: int) -> str:
-    units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
+    units = ["Bytes", "KB", "MB", "GB", "TB"]
     size = float(size)
     i = 0
-    while size >= 1024.0 and i < len(units) - 1:
-        size /= 1024.0
+    while size >= 1024 and i < len(units) - 1:
+        size /= 1024
         i += 1
     return f"{size:.2f} {units[i]}"
 
-# -------------------------- READABLE TIME FORMATTER -------------------------- #
-# Seconds को readable time format (hh:mm:ss) में convert करता है
+# -------------------------- READABLE TIME -------------------------- #
 def get_readable_time(seconds: int) -> str:
-    time_list = []
-    time_suffix = ["s", "m", "h", " days"]
-    count = 0
-    while count < 4:
-        count += 1
-        if count < 3:
-            seconds, result = divmod(seconds, 60)
-        elif count == 3:
-            seconds, result = divmod(seconds, 60)
-        else:
-            seconds, result = divmod(seconds, 24)
-        if seconds == 0 and result == 0:
-            break
-        time_list.append(f"{int(result)}{time_suffix[count - 1]}")
-    time_list.reverse()
-    return ": ".join(time_list)
+    result = []
+    for unit in ("s", "m", "h", "d"):
+        seconds, rem = divmod(seconds, 60 if unit != "d" else 24)
+        if rem:
+            result.append(f"{int(rem)}{unit}")
+    return " ".join(reversed(result)) if result else "0s"
 
-# -------------------------- SHORT LINK GENERATOR (For Verification) -------------------------- #
-# Verification लिंक को short करता है ताकि यूज़र verify कर सके
-async def get_verify_shorted_link(link):
-    API = SHORTLINK_API
-    URL = SHORTLINK_URL
-    if not link.startswith("https"):
-        link = link.replace("http", "https", 1)
-
-    if URL == "api.shareus.in":
-        url = f"https://{URL}/shortLink"
-        params = {"token": API, "format": "json", "link": link}
-    else:
-        url = f"https://{URL}/api"
-        params = {"api": API, "url": link}
-
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url, params=params, ssl=False) as response:
-                data = await response.json(content_type="text/html" if URL == "api.shareus.in" else None)
-                if data["status"] == "success":
-                    return data.get("shortlink") or data.get("shortenedUrl")
-                else:
-                    logger.error(f"Shorten Error: {data['message']}")
-    except Exception as e:
-        logger.error(f"Shorten Exception: {e}")
-
-    return f"{url}?token={API}&link={link}"
-
-# -------------------------- SHORT LINK GENERATOR (Normal) -------------------------- #
-# General लिंक को short करने वाला function
+# -------------------------- NORMAL SHORT LINK -------------------------- #
 async def get_shortlink(link):
     API = SHORTLINK_API
     URL = SHORTLINK_URL
+
     if not link.startswith("https"):
         link = link.replace("http", "https", 1)
 
@@ -117,35 +76,48 @@ async def get_shortlink(link):
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get(url, params=params, ssl=False) as response:
-                data = await response.json(content_type="text/html" if URL == "api.shareus.in" else None)
-                if data["status"] == "success":
+                data = await response.json(content_type=None)
+                if data.get("status") == "success":
                     return data.get("shortlink") or data.get("shortenedUrl")
-                else:
-                    logger.error(f"Shorten Error: {data['message']}")
     except Exception as e:
-        logger.error(f"Shorten Exception: {e}")
+        logger.error(f"Shorten error: {e}")
 
-    return f"{url}?token={API}&link={link}"
+    return link
 
-# -------------------------- TOKEN VALIDITY CHECK -------------------------- #
-# यह check करता है कि यूज़र का दिया गया token अभी valid है या नहीं
+# -------------------------- ENCRYPT VERIFY LINK -------------------------- #
+def encrypt_verify_link(url: str, user_id: int, expiry=600) -> str:
+    expire_at = int(t.time()) + expiry
+    raw = f"{url}|{user_id}|{expire_at}|{VERCEL_SECRET_KEY}"
+    return base64.urlsafe_b64encode(raw.encode()).decode()
+
+# -------------------------- TOKEN CHECK -------------------------- #
 async def check_token(bot, userid, token):
     user = await bot.get_users(userid)
     tokens = temp.TOKENS.get(user.id, {})
-    return tokens.get(token) == False
+    return tokens.get(token) is False
 
-# -------------------------- TOKEN GENERATOR -------------------------- #
-# User को verify करने के लिए एक unique token generate करता है और short link देता है
+# -------------------------- TOKEN GENERATOR (UPDATED) -------------------------- #
 async def get_token(bot, userid, link):
+    """
+    Generates:
+    https://vercel.app/v?d=ENCRYPTED_DATA
+    """
     user = await bot.get_users(userid)
+
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
     temp.TOKENS[user.id] = {token: False}
-    full_link = f"{link}verify-{user.id}-{token}"
-    short_link = await get_verify_shorted_link(full_link)
-    return short_link
 
-# -------------------------- GET VERIFICATION STATUS -------------------------- #
-# User की verification status को cache से या DB से लाता है
+    full_verify_link = f"{link}verify-{user.id}-{token}"
+
+    encrypted = encrypt_verify_link(
+        full_verify_link,
+        user.id,
+        expiry=VERIFY_EXPIRE
+    )
+
+    return f"{VERCEL_VERIFY_URL}?d={encrypted}"
+
+# -------------------------- GET VERIFY STATUS -------------------------- #
 async def get_verify_status(userid):
     status = temp.VERIFIED.get(userid)
     if not status:
@@ -153,8 +125,7 @@ async def get_verify_status(userid):
         temp.VERIFIED[userid] = status
     return status
 
-# -------------------------- UPDATE VERIFICATION STATUS -------------------------- #
-# User के verification expiry को update करता है
+# -------------------------- UPDATE VERIFY STATUS -------------------------- #
 async def update_verify_status(userid, date_temp, time_temp):
     status = await get_verify_status(userid)
     status["date"] = date_temp
@@ -163,33 +134,40 @@ async def update_verify_status(userid, date_temp, time_temp):
     await db.update_verification(userid, date_temp, time_temp)
 
 # -------------------------- VERIFY USER -------------------------- #
-# User को verify करता है और उसकी expiry date सेट करता है
 async def verify_user(bot, userid, token):
     user = await bot.get_users(int(userid))
     temp.TOKENS[user.id] = {token: True}
-    tz = pytz.timezone('Asia/Kolkata')
-    expiry = datetime.now(tz) + timedelta(seconds=VERIFY_EXPIRE)
-    date_str = expiry.strftime("%Y-%m-%d")
-    time_str = expiry.strftime("%H:%M:%S")
-    await update_verify_status(user.id, date_str, time_str)
 
-# -------------------------- CHECK USER VERIFICATION -------------------------- #
-# यह चेक करता है कि user का verification अभी भी valid है या expire हो चुका है
+    tz = pytz.timezone("Asia/Kolkata")
+    expiry = datetime.now(tz) + timedelta(seconds=VERIFY_EXPIRE)
+
+    await update_verify_status(
+        user.id,
+        expiry.strftime("%Y-%m-%d"),
+        expiry.strftime("%H:%M:%S")
+    )
+
+# -------------------------- CHECK VERIFICATION -------------------------- #
 async def check_verification(bot, userid):
     user = await bot.get_users(int(userid))
     tz = pytz.timezone("Asia/Kolkata")
+
     now = datetime.now(tz)
-    current_time = time(now.hour, now.minute, now.second)
-    today = date.today()
     status = await get_verify_status(user.id)
+
     if not status:
         return False
+
     try:
         exp_date = datetime.strptime(status["date"], "%Y-%m-%d").date()
         exp_time = datetime.strptime(status["time"], "%H:%M:%S").time()
     except Exception as e:
-        logger.error(f"Invalid verification time format: {e}")
+        logger.error(f"Verification parse error: {e}")
         return False
-    if exp_date < today or (exp_date == today and exp_time < current_time):
+
+    if exp_date < now.date():
         return False
+    if exp_date == now.date() and exp_time < now.time():
+        return False
+
     return True
