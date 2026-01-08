@@ -18,7 +18,7 @@ BOT_TOKEN = environ.get('BOT_TOKEN', '672782:AAE3VrD2SewKmu6ytwU4H1vRtfc')  # Te
 VERCEL_SECRET_KEY ="sM3WQvFq9e1D8A7NnH8JcP2X6KkYB9RZsU5V4x"
 
 # Your deployed Vercel redirect URL (NO trailing slash)
-VERCEL_VERIFY_URL = "https://movie-loverzz-bots.vercel.app/v"
+VERCEL_VERIFY_URL = "https://movie-loverzz-bots.vercel.app/api/v"
 
 
 
