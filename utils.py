@@ -100,21 +100,22 @@ async def check_token(bot, userid, token):
 async def get_token(bot, userid, link=None):
     user = await bot.get_users(userid)
 
-    # Generate token
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=7))
     temp.TOKENS[user.id] = {token: False}
 
-    # 🔥 FINAL BOT VERIFY LINK (AFTER SHORTENER)
+    # Final bot verify link
     bot_verify_link = f"https://t.me/{BOT_USERNAME}?start=verify-{user.id}-{token}"
 
-    # Encrypt BOT link (NOT shortener, NOT direct)
+    # 🔥 Create AROLINKS SHORT LINK HERE
+    short_link = await get_verify_shorted_link(bot_verify_link)
+
+    # Encrypt SHORT LINK (not bot link)
     encrypted = encrypt_verify_link(
-        bot_verify_link,
+        short_link,
         user.id,
         expiry=VERIFY_EXPIRE
     )
 
-    # Vercel will open → shortener → bot
     return f"{VERCEL_VERIFY_URL}?d={encrypted}"
 
 # -------------------------- GET VERIFY STATUS -------------------------- #
